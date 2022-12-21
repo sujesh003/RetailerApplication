@@ -2,7 +2,6 @@ package com.example.retailer.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.http.HttpStatus;
 
 import java.time.LocalDateTime;
 
@@ -17,5 +16,4 @@ public class ResponseDto {
     private Object detail;
     private final LocalDateTime timestamp = LocalDateTime.now();
     private Object code;
-    private HttpStatus httpStatus;
 }

@@ -9,18 +9,11 @@ import org.springframework.http.ResponseEntity;
  */
 public class RetailResponse {
 
-    public static ResponseEntity<ResponseDto> successResponseStatusWithMessage(Object o, String message, HttpStatus httpStatus) {
+    public static ResponseEntity<ResponseDto> successResponse(Object o) {
         ResponseDto r = new ResponseDto();
         r.setDetail(o);
-        r.setMessage(message);
-        r.setCode(httpStatus.value());
-        return new ResponseEntity<>(r, httpStatus);
-    }
-
-    public static ResponseEntity<ResponseDto> failResponseWithStatus(HttpStatus httpStatus, String message) {
-        ResponseDto r = new ResponseDto();
-        r.setMessage(message);
-        r.setCode(httpStatus.value());
-        return new ResponseEntity<>(r, httpStatus);
+        r.setMessage("SUCCESS");
+        r.setCode(HttpStatus.OK.value());
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 }
