@@ -1,5 +1,6 @@
 package com.example.retailer.service;
 
+import com.example.retailer.repository.RetailRepository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -7,4 +8,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class RetailServiceImpl implements RetailService {
+
+    private final RetailRepository retailRepository;
+
+    public RetailServiceImpl(RetailRepository retailRepository) {
+        this.retailRepository = retailRepository;
+    }
+
+
 }
