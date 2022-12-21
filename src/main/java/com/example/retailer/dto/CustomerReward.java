@@ -13,8 +13,6 @@ import java.util.Map;
 public class CustomerReward {
 
     private String customerName;
-
-    private Map<String,Integer> rewards;
-
+    private Map<String, Integer> rewards;
     private int total;
 }

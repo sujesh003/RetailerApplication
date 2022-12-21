@@ -47,9 +47,9 @@ public class TransactionServiceImpl implements TransactionService {
     private CustomerReward getCustomerReward(List<Transaction> transactions) {
         Map<String, Integer> rewardsCollectedByMonth = transactions
                 .stream()
-                .map(trans -> {
-                    String month = trans.getTransactionDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
-                    int amount = calculateReward(trans.getAmount());
+                .map(transaction -> {
+                    String month = transaction.getTransactionDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+                    int amount = calculateReward(transaction.getAmount());
                     return Pair.of(month, amount);
                 }).collect(Collectors.groupingBy(Pair::getFirst, Collectors.summingInt(Pair::getSecond)));
         CustomerReward customerReward = new CustomerReward();
