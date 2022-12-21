@@ -1,6 +1,6 @@
 package com.example.retailer.service;
 
-import com.example.retailer.repository.RetailRepository;
+import com.example.retailer.repository.TransactionRepository;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class RetailServiceImpl implements RetailService {
 
-    private final RetailRepository retailRepository;
+    private final TransactionRepository retailRepository;
 
-    public RetailServiceImpl(RetailRepository retailRepository) {
+    public RetailServiceImpl(TransactionRepository retailRepository) {
         this.retailRepository = retailRepository;
     }
 

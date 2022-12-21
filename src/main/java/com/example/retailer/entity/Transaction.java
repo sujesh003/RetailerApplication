@@ -1,5 +1,6 @@
 package com.example.retailer.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -20,6 +21,6 @@ public class Transaction {
     private Long transactionId;
     private LocalDateTime transactionDate;
     private int amount;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Customer customer;
 }
