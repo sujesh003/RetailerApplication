@@ -1,6 +1,7 @@
 package com.example.retailer.service;
 
 import com.example.retailer.dto.CustomerReward;
+import com.example.retailer.entity.Transaction;
 
 import java.util.List;
 
@@ -10,6 +11,10 @@ import java.util.List;
 public interface TransactionService {
 
     List<CustomerReward> getRewardPointsByQuarter();
+
+    int calculateReward(int amountSpent);
+
+    CustomerReward getCustomerReward(List<Transaction> transactions);
 
 
 }

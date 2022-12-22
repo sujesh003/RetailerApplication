@@ -44,7 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
         return customerRewards;
     }
 
-    private CustomerReward getCustomerReward(List<Transaction> transactions) {
+    public CustomerReward getCustomerReward(List<Transaction> transactions) {
         Map<String, Integer> rewardsCollectedByMonth = transactions
                 .stream()
                 .map(transaction -> {
@@ -59,7 +59,7 @@ public class TransactionServiceImpl implements TransactionService {
         return customerReward;
     }
 
-    private int calculateReward(int amountSpent) {
+    public int calculateReward(int amountSpent) {
         if (amountSpent < 50) {
             return 0;
         }
