@@ -76,7 +76,7 @@ public class TransactionServiceTest {
 //        assertTrue(expectedCustomerRewards.containsAll(actualCustomerRewards) && actualCustomerRewards.containsAll(expectedCustomerRewards));
     }
 
-    public List<CustomerReward> getCustomerRewards() {
+    private List<CustomerReward> getCustomerRewards() {
         List<CustomerReward> customerRewards = new ArrayList<>();
         CustomerReward customerReward = new CustomerReward();
         customerReward.setTotal(30);
@@ -88,7 +88,7 @@ public class TransactionServiceTest {
         return customerRewards;
     }
 
-    public List<Transaction> getTransactions() {
+    private List<Transaction> getTransactions() {
         Customer customer = new Customer();
         customer.setId(1L);
         customer.setCustomerCode("123");
