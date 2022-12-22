@@ -2,9 +2,11 @@ package com.example.retailer;
 
 import com.example.retailer.controller.RetailController;
 import com.example.retailer.dto.CustomerReward;
+import com.example.retailer.dto.ResponseDto;
 import com.example.retailer.entity.Transaction;
 import com.example.retailer.repository.TransactionRepository;
 import com.example.retailer.service.TransactionServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -13,6 +15,8 @@ import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -24,10 +28,6 @@ import java.util.Map;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author Sujesh Shahi on  12/22/2022
@@ -47,6 +47,8 @@ public class TransactionControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @BeforeEach
     public void setup() {
@@ -68,9 +70,7 @@ public class TransactionControllerTest {
         List<CustomerReward> expectedCustomerRewards = transactionServiceImpl.getRewardPointsByQuarter();
         when(transactionServiceImpl.getRewardPointsByQuarter()).thenReturn(expectedCustomerRewards);
         mockMvc.perform(get(uri))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(content().string("OK"));
+                .equals(getResponseDto());
     }
 
     private List<CustomerReward> getCustomerRewards() {
@@ -83,5 +83,13 @@ public class TransactionControllerTest {
         customerReward.setCustomerName("Sujesh Shahi");
         customerRewards.add(customerReward);
         return customerRewards;
+    }
+
+    private ResponseEntity<ResponseDto> getResponseDto() {
+        ResponseDto r = new ResponseDto();
+        r.setDetail(getCustomerRewards());
+        r.setMessage("SUCCESS");
+        r.setCode(HttpStatus.OK.value());
+        return new ResponseEntity<>(r, HttpStatus.OK);
     }
 }
