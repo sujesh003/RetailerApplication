@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -66,7 +67,7 @@ public class TransactionControllerTest {
         List<CustomerReward> actualCustomerRewards = getCustomerRewards();
         List<CustomerReward> expectedCustomerRewards = transactionServiceImpl.getRewardPointsByQuarter();
         when(transactionServiceImpl.getRewardPointsByQuarter()).thenReturn(expectedCustomerRewards);
-        mockMvc.perform(post(uri))
+        mockMvc.perform(get(uri))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string("OK"));
