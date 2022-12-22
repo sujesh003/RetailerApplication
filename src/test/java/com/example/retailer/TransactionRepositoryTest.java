@@ -6,15 +6,14 @@ import com.example.retailer.repository.TransactionRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 /**
  * @author Sujesh Shahi on  12/22/2022
@@ -23,16 +22,13 @@ import static org.mockito.Mockito.when;
 @DataJpaTest
 public class TransactionRepositoryTest {
 
-    @Autowired
-    TestEntityManager testEntityManager;
-
     @Mock
     TransactionRepository transactionRepository;
 
     @Test
     public void saveTransaction() {
         Transaction transaction = getTransaction();
-        when(transactionRepository.save(transaction)).thenReturn(transaction);
+        Mockito.lenient().when(transactionRepository.save(any())).thenReturn(transaction);
     }
 
     private Transaction getTransaction() {
