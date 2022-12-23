@@ -16,4 +16,11 @@ public class RetailResponse {
         r.setCode(HttpStatus.OK.value());
         return new ResponseEntity<>(r, HttpStatus.OK);
     }
+
+    public static ResponseEntity<ResponseDto> failResponseWithStatus(HttpStatus httpStatus, String message) {
+        ResponseDto r = new ResponseDto();
+        r.setMessage(message);
+        r.setCode(httpStatus.value());
+        return new ResponseEntity<>(r, httpStatus);
+    }
 }

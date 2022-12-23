@@ -3,6 +3,7 @@ package com.example.retailer.service;
 import com.example.retailer.dto.CustomerReward;
 import com.example.retailer.entity.Customer;
 import com.example.retailer.entity.Transaction;
+import com.example.retailer.exception.RetailException;
 import com.example.retailer.repository.TransactionRepository;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,9 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<CustomerReward> getRewardPointsByQuarter() {
         List<Transaction> transactions = transactionRepository.findAll();
+        if (transactions.isEmpty()) {
+            throw new RetailException("No any transactions available");
+        }
         Map<Customer, List<Transaction>> transactionGroupByCustomer = transactions
                 .stream()
                 .collect(Collectors.groupingBy(Transaction::getCustomer, Collectors.toList()));
