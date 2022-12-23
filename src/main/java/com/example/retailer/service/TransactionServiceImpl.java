@@ -4,7 +4,10 @@ import com.example.retailer.dto.CustomerReward;
 import com.example.retailer.entity.Customer;
 import com.example.retailer.entity.Transaction;
 import com.example.retailer.exception.RetailException;
+import com.example.retailer.exception.RetailExceptionHandler;
 import com.example.retailer.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
@@ -27,10 +30,13 @@ public class TransactionServiceImpl implements TransactionService {
         this.transactionRepository = transactionRepository;
     }
 
+    private static final Logger logger = LoggerFactory.getLogger(TransactionServiceImpl.class);
+
 
     @Override
     public List<CustomerReward> getRewardPointsByQuarter() {
         List<Transaction> transactions = transactionRepository.findAll();
+        logger.info("Getting transactions {}", transactions);
         if (transactions.isEmpty()) {
             throw new RetailException("No any transactions available");
         }
