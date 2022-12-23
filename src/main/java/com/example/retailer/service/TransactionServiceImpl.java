@@ -45,11 +45,11 @@ public class TransactionServiceImpl implements TransactionService {
 
         List<CustomerReward> customerRewards = new ArrayList<>();
 
-        for (var transactionEntry : transactionGroupByCustomer.entrySet()) {
-            CustomerReward customerReward = getCustomerReward(transactionEntry.getValue());
-            customerReward.setCustomerName(transactionEntry.getKey().getName());
+        transactionGroupByCustomer.forEach((customer, transactionList) -> {
+            CustomerReward customerReward = getCustomerReward(transactionList);
+            customerReward.setCustomerName(customer.getName());
             customerRewards.add(customerReward);
-        }
+        });
         return customerRewards;
     }
 
